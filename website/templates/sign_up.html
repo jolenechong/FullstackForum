@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block title %}Sign Up {% endblock %} {% block
+content %}
+<section class='auth'>
+<form method="POST">
+  <h3>Sign Up</h3>
+  <div class="formContainer">
+    <div class="formQuestion">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+      />
+      <label for="email">Email Address</label>
+    </div>
+    <div class="formQuestion">
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+      />
+      <label for="username">Username</label>
+    </div>
+    <div class="formQuestion">
+      <input
+        type="password"
+        id="password1"
+        name="password1"
+        required
+      />
+      <label for="password1">Password</label>
+    </div>
+    <div class="formQuestion">
+      <input
+        type="password"
+        id="password2"
+        name="password2"
+        required
+      />
+      <label for="password2">Confirm Your Password</label>
+    </div>
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-border-underline">Sign Up</button>
+</form>
+</section>
+{% endblock %}

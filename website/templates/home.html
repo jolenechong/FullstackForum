@@ -1,0 +1,232 @@
+{% extends "base.html" %} {% block title %}Home {% endblock %}
+
+{% block content %}
+<section id="header">
+  <div class='headerContainer'>
+    <h1>Forum Name</h1>
+  <button onclick='showcreatepost()' class='btn' style="background:transparent"><i class="fas fa-plus"></i>  Create Post</button>
+  <form method="POST" id='createPost' style="display: none;">
+      <input type="text" name="post_title" id="post_title" placeholder="Title of Post" ></input>
+      <textarea name="post_content" id="post_content"placeholder='Content of Post' ></textarea>
+      <br />
+      <div>
+        <button type="submit" class="btn btn-border-underline">POST</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+  <section class='communityContainer'>
+    <main>
+      <section id="postsContainer">
+        <ul id='posts'>
+          {% for content in post %}
+          <li class="post">
+            <div class="voteNote">
+              <span id="likes-count-{{content.post_id}}">
+                {{ content.likes|length }}</span> 
+                {% if user.id in content.likes|map(attribute="user_id")|list %}
+                <i
+                  class="fas fa-sort"
+                  id="like-button-{{content.post_id}}"
+                  onclick="like({{content.post_id}})"
+                ></i>
+                {% else %}
+                <i
+                  class="fas fa-sort"
+                  id="like-button-{{content.post_id}}"
+                  onclick="like({{content.post_id}})"
+                ></i>
+                {% endif %}
+            </div>
+            <div class="mainNote">
+              <p style="color: grey; font-size: 0.7rem">Posted by <span>{{content.user.username}}</span><span class='time'> {{ content.enter_date|format_datetime}}</span></p>
+              <h3>{{ content.post_title}}</h3>
+              <p class="post_content">{{ content.post_content}}</p>
+              <div class='divider'></div>
+              <div class="options">
+                <i class="fas fa-ellipsis-h"></i>
+                <div class="optionsContainer">
+                  {% if content.user_id == user.id %}
+                  <button type="button" class="close"  onClick="deleteNote({{ content.post_id }})">
+                    <i class="fas fa-trash"></i>delete</button
+                  ><br />
+                  <button type="button" class="close editPost">
+                    <i class="fas fa-edit"></i>edit
+                  </button>
+                  {% else %}
+                  <button type="button" class="close">
+                    <i class="far fa-flag"></i></i>report
+                  </button>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="viewaddComment">
+                <form method="post" action="/create-comment/{{content.post_id}}" id="create-comment">
+                  <input type="text" placeholder="Comment as {{user.username}} here..." id="text" name="text"/>
+                  <button type="submit" id='submitComment'>Post</button>
+              </form>
+              {% if content.comments | length > 0 %}
+                  <div class='commentContainer'>
+                    <i class="far fa-comment"></i>
+                    <button class="viewComments">View {{content.comments|length}} Comments</button>
+                  </div>
+                  {% else %}
+                  <div class='commentContainer'>
+                    <i class="far fa-comment" style="color: grey;"></i>
+                    <button id="viewComments" style="color: grey; text-decoration: none;cursor:default;">No Comments</button>
+                  </div>
+                  {% endif %}
+              </div>
+
+              <div class="comments" style="display: none;">
+                {% for comment in content.comments %}
+                <div class="indivComment">
+                  <p><span>{{comment.user.username}}</span>  {{comment.text}}</p>
+                <p>{{comment.enter_date|format_datetime}}</p>
+                {% if user.id == comment.user_id or user.id == content.user_id %}
+                <a href='/delete-comment/{{comment.id}}'>
+                  <button type="button" class="close deleteComment"  onClick="deleteComment({{ comment.id }})">
+                    <i class="fas fa-trash"></i></button>
+                </a>
+                {% endif %}
+                </div>
+                {% endfor %}
+              </div>
+    
+              <div class="modal">
+                <div class="modal-content">
+                  <span class="closeModal">&times;</span>
+                  <h1>Edit your post</h1>
+                  <form class="editForm" action='/edit-post/{{content.post_id}}' >
+                    <input type="text" value="{{ content.post_title}}" name='post_title' /><br />
+                    <textarea name='post_content'>{{ content.post_content}}</textarea><br />
+                    <button type="submit" class="btn btn-border-underline">Save Changes</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+    </main>
+    
+    <aside>
+      <div class='intro'>
+        <h1>About Community</h1>
+        <p class='communityDesc'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in rhoncus risus. Quisque non sem vel ante suscipit pulvinar vel egestas elit. Nam hendrerit enim sit amet convallis sollicitudin. </p>
+        <div class='communityStats'>
+          <p><i class="fas fa-user-plus"></i> 17k <span>following</span></p>
+        </div>
+        <button class='btn btn-background-slide'>Join Community</button>
+      </div>
+      <div class='intro'>
+        <h1>Rules</h1>
+        <section class="collapseContainer">
+          <button class="collapsible">Meme</button>
+          <div class="content">
+            <p>Aenean at pellentesque lectus. Nunc molestie magna purus, vitae maximus metus tincidunt venenatis. </p>
+          </div>
+    
+          <button class="collapsible">Spam</button>
+          <div class="content">
+            <p>hi</p>
+          </div>
+    
+          <button class="collapsible">Bots</button>
+          <div class="content">
+            <p>hi</p>
+          </div>
+    
+          <button class="collapsible">No Abuse</button>
+          <div class="content">
+            <p>hi</p>
+          </div>
+    
+          <button class="collapsible">Giving dangerous advice</button>
+          <div class="content">
+            <p>hi</p>
+          </div>
+        </section>
+      </div>
+
+      <div class='intro'>
+        <p>created by: <a href="https://github.com/jolenechong" target="_blank">jolene</a></p>
+        <p>source code:</p>
+      </div>
+
+    </aside>
+    </div>
+</section>
+
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  }
+
+  
+  var optionContainer = document.getElementsByClassName('options');
+
+for(var i = 0; i < optionContainer.length; i++){
+  optionContainer[i].addEventListener('click', hide);
+}
+
+function hide(e){
+  var options = e.currentTarget.getElementsByClassName('optionsContainer')[0];
+    if (options.style.display === "none") {
+         options.style.display = "block";
+      }else if(options.style.display==="block"){
+        options.style.display = 'none'
+      } else {
+         options.style.display = "block";
+      }
+}
+
+// modals, opening modal
+var editFormButton = document.getElementsByClassName('editPost');
+
+for(var i = 0; i < editFormButton.length; i++){
+  editFormButton[i].addEventListener('click', editPost);
+}
+
+function editPost(e){
+  var modal = e.currentTarget.parentElement.parentElement.parentElement.querySelector('.modal');
+  console.log(modal)
+  modal.style.display = "block";
+}
+
+// closing modals
+var modals = document.querySelectorAll('.modal');
+var spans = document.getElementsByClassName("closeModal");
+
+for (var i = 0; i < spans.length; i++) {
+ spans[i].onclick = function() {
+    for (var index in modals) {
+      if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+    }
+ }
+}
+
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+     for (var index in modals) {
+      if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+     }
+    }
+}
+// end of modals
+</script>
+{% endblock content %}

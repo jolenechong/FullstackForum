@@ -1,0 +1,652 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: "Fira Sans", sans-serif;
+  overflow: overlay;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(194, 194, 194,0.5);
+  border-radius: 30px;
+}
+
+main {
+  flex: 3;
+}
+
+aside {
+  flex: 1;
+}
+
+h1,h2,h3{
+  font-size: 1rem;
+}
+
+p{
+  font-size: 0.8rem;
+}
+
+.communityContainer {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+}
+
+@media screen and (max-width: 961px) {
+  .communityContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  aside {
+    order: 1;
+  }
+  main {
+    order: 2;
+    width: 100%;
+  }
+}
+
+nav {
+  width: 100%;
+  font-family: "Fira Sans", sans-serif;
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+  padding: 16px 10px;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-size: 0.8rem;
+}
+
+/* profile section */
+#profile {
+  text-align: center;
+  padding: 50px;
+}
+
+#profile img {
+  width: 100px;
+}
+
+#profile h1 {
+  padding-top: 25px;
+}
+#profile p {
+  padding-bottom: 25px;
+}
+/* end of profile section */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  border: none;
+  outline: 0;
+  border-bottom: #30c3cd solid 2px;
+  background-color: transparent;
+  color: black;
+  width: 100%;
+}
+
+label {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  transition: 400ms;
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: black;
+  /*  disable text selection highlight  */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  border-bottom: #30c3cd solid 2px;
+  outline: 0;
+}
+
+/* upon correct input */
+input[type="text"]:invalid,
+input[type="email"]:invalid,
+input[type="password"]:invalid,
+textarea:invalid {
+  border-bottom: grey solid 2px;
+  outline: 0;
+}
+
+input[type="text"]:valid ~ label,
+input[type="email"]:valid ~ label,
+input[type="password"]:valid ~ label,
+textarea:valid ~ label {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  color: #30c3cd;
+}
+/* end of correct input */
+
+/* move label up and change its color on focus */
+input[type="text"]:focus ~ label,
+input[type="email"]:focus ~ label,
+input[type="password"]:focus ~ label,
+textarea:focus ~ label {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  color: #30c3cd;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  border-bottom: #30c3cd solid 2px;
+}
+/* end */
+
+.formQuestion {
+  position: relative;
+  padding-top: 20px;
+}
+
+.formContainer {
+  background-color: transparent;
+  width: 100%;
+}
+
+/* start of alerts */
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  font-size: 0.8rem;
+}
+.alert-success {
+  padding: 20px;
+  background-color: #43bf76;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+/* css for the note */
+
+.close {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: rgb(218, 66, 66);
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-align: left;
+  padding: 10px;
+}
+.optionsContainer i {
+  margin-right: 10px;
+}
+
+.options {
+  position: absolute;
+  top: 10;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.optionsContainer {
+  position: absolute;
+  top: 20px;
+  left: -110px;
+  background-color: white;
+  display: none;
+  background-color: black;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1000;
+  width: 125px;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+.post {
+  padding: 20px;
+    width: 100%;
+    border-radius: 5px;
+    border: #ededed 1px solid;
+    min-width: 450px;
+    flex: 1;
+    margin: 10px;
+    position: relative;
+    display: flex;
+    -webkit-box-shadow: 10px 10px 20px 0px rgb(0 0 0 / 10%);
+    box-shadow: 10px 10px 20px 0px rgb(0 0 0 / 10%);
+}
+
+.post_content {
+  color: #dddddd;
+}
+.post h3 {
+  font-weight: 900;
+}
+
+#posts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#moviesReviewed {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* end of css for note */
+#header {
+  padding: 50px;
+  min-height: 150px;
+  background: linear-gradient(90.65deg, #de5757 0%, #52b2d0 100%);
+}
+
+.headerContainer {
+  max-width: 1200px;
+  margin: auto;
+}
+
+#header h1 {
+  text-align: center;
+}
+#createPost {
+  max-width: 500px;
+  padding-top:10px;
+}
+
+.intro {
+  padding: 15px;
+  border-radius: 5px;
+  flex: 1;
+  margin: 10px;
+  position: relative;
+  border-radius: 5px;
+  border: #ededed 1px solid;
+}
+.intro h1{
+  font-weight: 500;
+  padding-top: 5px;
+  padding-bottom:10px;
+}
+.intro p{
+  color:#8f8f8f;
+}
+
+@media screen and (min-width: 961px) {
+  .intro{
+    min-width: 400px;
+  }
+  .post{
+    min-width: 400px;
+  }
+}
+
+
+
+/* note css */
+.voteNote {
+  flex: 1;
+}
+.voteNote i {
+  color: #ed6a5a;
+}
+.mainNote {
+  flex: 15;
+  position: relative;
+  width: 100%;
+}
+.mainNote h3 {
+  color: #424651;
+  font-size: 1rem;
+  padding-bottom: 5px;
+  font-weight: 550;
+}
+.mainNote p {
+  font-size: 0.8rem;
+  color: #8f8f8f;
+}
+.mainNote .post_content {
+  padding-bottom: 10px;
+}
+.mainNote p span {
+  color: #5a9eed;
+}
+.divider {
+  width: 90%;
+  height: 1px;
+  background-color: #ededed;
+  margin: 10px 0;
+}
+.mainNote .time {
+  color: #8f8f8f;
+}
+
+
+.options i{
+  color:#ed6a5a;
+}
+.communityStats p span{
+  font-size:0.8rem;
+}
+.communityStats p{
+  font-size:0.8rem;
+}
+.communityStats i{
+  margin-right:10px;
+}
+
+.communityDesc{
+  padding-bottom:15px;
+}
+.communityStats{
+  padding-bottom: 15px;
+}
+
+/* css for dropdowns */
+.collapseContainer {
+  margin: auto;
+  max-width: 900px;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  max-width: 900px;
+  /* padding-right: 20px; */
+}
+.collapsible {
+  font-family: "Fira Sans", sans-serif;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgb(74 74 74);
+  text-align: left;
+  outline: none;
+  background-color: transparent;
+  max-width: 900px;
+  margin: auto;
+  color: black;
+  font-size: 0.8rem;
+}
+
+.collapsible:after {
+  content: "\002B";
+  color: black;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+  transition: 400ms;
+}
+
+.active:after {
+  content: "+";
+  transform: rotate(45deg);
+}
+
+/* createpost form css */
+#createPost input[type="text"],
+#createPost textarea{
+  color:white;
+  border-bottom:2px white solid;
+  font-family: "Fira Sans", sans-serif;
+  margin:10px 0 10px 0;
+}
+#createPost ::placeholder{
+  color: white;
+  font-family: "Fira Sans", sans-serif;
+}
+#createPost textarea{
+  resize: vertical;
+}
+/* end of createpost form */
+
+/* editing text form */
+
+.editForm input[type="text"],
+.editForm textarea {
+  background-color: transparent;
+    border: none;
+    border-bottom: 2px black solid;
+    outline: 0;
+    color: black;
+    width: 100%;
+    margin: 10px 0;
+    max-width: 800px;
+    font-family: "Fira Sans", sans-serif;
+}
+
+.editForm textarea{
+  min-height: 100px;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 300px;
+  max-width: 900px;
+  border-radius: 5px;
+
+}
+
+/* The Close Button */
+.closeModal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closeModal:hover,
+.closeModal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* end of editing text form */
+
+/* css for buttons */
+.btn{
+  position: relative;
+  background-color: #5A9EED;
+  color: white;
+  border: 0;
+  outline: 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size:0.8rem;
+}
+.btn.btn-border-underline::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:-1;
+  border-bottom:black 4px solid;
+  transform: scaleX(0);
+  transform-origin:middle;
+  transition: top, left, right, bottom, 200ms;
+  border-radius: 5px;
+}
+
+.btn.btn-border-underline:hover::before,
+.btn.btn-border-underline:focus::before{
+  transform:scaleX(1)
+}
+
+.btn.btn-border-underline{
+  z-index:1;
+}
+
+.btn.btn-background-slide::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:-1;
+  background-color:#ed6a5a;
+  transform: scaleX(0);
+  transform-origin:left;
+  transition: top, left, right, bottom, 200ms;
+  border-radius: 5px;
+}
+
+.btn.btn-background-slide:hover::before{
+  transform:scaleX(1)
+}
+.btn.btn-background-slide{
+  z-index:1;
+}
+
+/* end of css for buttons */
+
+
+/* login and sign up page */
+.auth{
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: auto;
+}
+.auth form{
+  margin-top: 100px;
+  padding: 20px;
+}
+.auth h3{
+  padding-bottom: 10px;
+}
+/* end of login and sign up page */
+
+
+/* css for comments */
+.commentContainer{
+  flex: 1;
+}
+
+.commentContainer button{
+  font-size: 0.8rem;
+  color:#5a9eed;
+  background-color: transparent;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}
+.commentContainer i{
+  color:#5a9eed;
+}
+.deleteComment{
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+}
+.comments{
+  padding-top: 10px;
+}
+
+#create-comment{
+  flex: 2;
+  width: 400px;
+}
+#create-comment ::placeholder{
+  font-size: 0.8rem;
+  color: #8f8f8f;
+}
+#create-comment button{
+  background-color: transparent;
+  color: #5a9eed;
+  border: none;
+  cursor: pointer;
+}
+#create-comment input[type='text']{
+  width: 80%;
+  border-bottom: solid #8f8f8f 1px;
+  /* border-bottom: none; */
+}
+
+.indivComment{
+  position: relative;
+  margin-bottom: 7px;
+}
+
+.viewaddComment{
+  display: flex;
+}
+
+@media screen and (max-width: 961px) {
+  #create-comment{
+    width: 100%;
+  }
+}
