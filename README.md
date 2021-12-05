@@ -12,6 +12,10 @@ Demo: https://youtu.be/9IAbNtU3KsY <br>
 Source Code: https://github.com/jolenechong/FullstackForum <br>
 
 <img src='website\static\images\FullStackForum.png' alt="screenshot of Forum website"/>
+<br>
+
+SQL Database (reference models.py)
+<img src='website\static\images\FullStackForumDatabase.png' alt="Data Modelling for SQL Database"/>
 
 ## Usage
 ```
